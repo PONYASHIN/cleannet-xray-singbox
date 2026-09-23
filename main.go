@@ -18,7 +18,7 @@ import (
 
 var (
 	dataPath    = flag.String("datapath", "./data", "Path to your custom 'data' directory")
-	outputName  = flag.String("outputname", "dlc.dat", "Name of the generated dat file")
+	outputName  = flag.String("outputname", "geosite.dat", "Name of the generated dat file")
 	outputDir   = flag.String("outputdir", "./", "Directory to place all generated files")
 	datProfile  = flag.String("datprofile", "", "Path of config file used to assemble custom dats")
 	exportLists = flag.String("exportlists", "", "Lists to be flattened and exported in plaintext format, separated by ',' comma")
