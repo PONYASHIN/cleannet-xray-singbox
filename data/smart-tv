@@ -156,6 +156,7 @@ domain:collect-us-fy2022.myhomescreen.tv
 domain:collect.myhomescreen.tv
 domain:config.samsungads.com
 domain:configprd.samsungcloudsolution.net
+domain:connect-client.lgthinq.com
 domain:connecttv.pelmorex.com
 domain:consent-proxy-prod.redbutton.de
 domain:consentssync.sibbo.net
@@ -201,6 +202,7 @@ domain:deluxemusic.hbbtv.xadspoteffects.tv
 domain:detail-ui-eu.vidaahub.com
 domain:detect.hismarttv.com
 domain:dev-multiscreen.samsung.com
+domain:developer.lge.com
 domain:device-ecom.vidaahub.com
 domain:device-metrics-us.amazon.com
 domain:dibxnox5pwdxl.cloudfront.net
@@ -412,6 +414,7 @@ domain:nevoai-iothub-53-prod.azure-devices.net
 domain:nextlgsdp.com
 domain:ngfts.lge.com
 domain:ngfts.lge.com.edgekey.net
+domain:ngfts.tv.wiselg.com
 domain:nickelodeon-at.gbucket.at
 domain:noti.lgthinq.com
 domain:notice.samsungcloudsolution.com
