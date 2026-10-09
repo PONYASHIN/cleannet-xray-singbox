@@ -32,6 +32,7 @@
 14. `win-spy` Телеметрия Windows
 15. `win-update` Обновления Windows
 16. `xiaomi` Мусор от xiaomi
+17. `ldplayer` Телеметрия ldplayer
 
 
 ---
