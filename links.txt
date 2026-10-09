@@ -65,4 +65,6 @@ https://raw.githubusercontent.com/ipanalytics/Hisense-VIDAA-DNS-Clean-TV-Blockli
 
 https://raw.githubusercontent.com/DRSDavidSoft/additional-hosts/master/domains/blacklist/activation.txt#activation
 
+https://raw.githubusercontent.com/PONYASHIN/ldplayer-telemetry-list/refs/heads/main/hosts#ldplayer
+
 https://raw.githubusercontent.com/PONYASHIN/pihole-whitelists/refs/heads/main/whitelist_domains#whitelist!white
