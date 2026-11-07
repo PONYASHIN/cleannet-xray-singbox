@@ -1,6 +1,6 @@
 # 🌐 GeoBlock Builder
 
-> Автоматическая сборка `geosite.dat` для Xray и `.srs` для sing-box
+> Автоматическая сборка `geosite.dat` для Xray, `.srs` для sing-box и `.yaml` для mihomo
 > для блокировки телеметрии и рекламы на уровне клиента
 
 
@@ -61,6 +61,7 @@ Python-скрипт, который:
 | **Белые списки** | Глобальные или привязанные к конкретному файлу |
 | **include** | Один файл может включать домены другого |
 | **SRS** | Готовые `.srs` для sing-box |
+| **yaml** | Готовые `.yaml` для mihomo |
 | **CI/CD** | Ежедневная автосборка через GitHub Actions |
 
 ---
@@ -91,6 +92,7 @@ python build_geosite.py
 | `geosite.dat` | Правила доменов для Xray |
 | `srs/geosite-*.srs` | Правила доменов для sing-box |
 | `data/*` | Промежуточные файлы |
+| `mihomo/*` | Файлы для Mihomo |
 
 ---
 
@@ -186,17 +188,17 @@ https://raw.githubusercontent.com/PONYASHIN/pihole-whitelists/refs/heads/main/wh
 [12:00:00] ============================================================
 [12:00:00]   Белый источник #1: allowlist [WHITE]
 [12:00:01]     Глобальный белый список: +1523
-[12:00:01]   Белый источник #2: adblock_wl [WHITE вычесть из adblock]
+[12:00:01]   Белый источник #2: adblock_wl [WHITE исключено из adblock]
 [12:00:02]     Белый список (для adblock): +412
 [12:00:02] ============================================================
 [12:00:02] ФАЗА 2: Параллельная загрузка 4 чёрных источников
 [12:00:02]         Потоков: 8
 [12:00:02] ============================================================
-[12:00:04]   [ads-trackers] +77078 доменов (всего 77078), удалено по белому списку: 1354
-[12:00:05]   [xiaomi] +53434 доменов (всего 53434), удалено по белому списку: 218
-[12:00:06]   [google] +8409 доменов (всего 8409), удалено по белому списку: 12
+[12:00:04]   [ads-trackers] +77078 доменов (всего 77078), исключено: 1354
+[12:00:05]   [xiaomi] +53434 доменов (всего 53434), исключено: 218
+[12:00:06]   [google] +8409 доменов (всего 8409), исключено: 12
 [12:00:06] ------------------------------------------------------------
-[12:00:06] Всего удалено по белым спискам во время загрузки: 1631
+[12:00:06] Всего исключено: 1631
 ```
 
 ---
@@ -248,6 +250,21 @@ https://raw.githubusercontent.com/PONYASHIN/pihole-whitelists/refs/heads/main/wh
 }
 ```
 
+### mihomo
+
+```json
+rule-providers:
+  adstrackers:
+    type: file
+    behavior: domain
+    format: yaml
+    path: ./mihomo/ads-trackers.yaml
+	
+rules:
+  - RULE-SET,adstrackers,REJECT
+  - MATCH,DIRECT
+```
+
 ---
 
 ## ❓ FAQ
@@ -259,6 +276,10 @@ https://raw.githubusercontent.com/PONYASHIN/pihole-whitelists/refs/heads/main/wh
 ### Файлы в `data/` не перезаписываются
 
 Скрипт удаляет только те списки в `data/`, чьи имена совпадают с именами ваших категорий. Другие списки не трогаются — если только ваш список с ними не совпадает по имени.
+
+### Ограничения yaml для mihomo
+
+include: не поддерживается в rule-provider mihomo, поэтому необходимо добавлять каждую группу отдельно.
 
 ### Как временно отключить белые списки
 
@@ -288,7 +309,9 @@ https://raw.githubusercontent.com/PONYASHIN/pihole-whitelists/refs/heads/main/wh
 │   └── win-update
 ├── geosite.dat                     # Результат
 ├── srs/                            # SRS-файлы
-│   └── geosite-adblock.srs
+│   └── geosite-ads-trackers.srs
+├── mohomo/                            # yaml-файлы
+│   └── geosite-ads-trackers.yaml
 └── README.md
 ```
 

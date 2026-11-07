@@ -608,6 +608,73 @@ def build_geosite():
     log(f"Готовый файл: {OUTPUT_GEOSITE} "
         f"({OUTPUT_GEOSITE.stat().st_size} байт)")
     return True
+	
+def build_mihomo_yaml():
+    """
+    Генерирует YAML-файлы rule-provider для mihomo (Clash Meta).
+    Формат: behavior: domain, payload с DOMAIN-SUFFIX / DOMAIN.
+    Читает файлы из data/ (уже в формате domain-list-community).
+    """
+    log("Генерация YAML для mihomo...")
+
+    MIHOMO_DIR = Path("mihomo")
+    ensure_dir(MIHOMO_DIR)
+
+    # Собираем только те файлы, что лежат в data/ и не являются include-only
+    # (include-only файлы содержат только строки include:, их пропускаем)
+    count = 0
+    for data_file in sorted(DLC_DATA_DIR.iterdir()):
+        if not data_file.is_file():
+            continue
+        if "." in data_file.name:
+            continue  # наши файлы без расширения
+
+        name = data_file.name
+        payload_lines = []
+
+        try:
+            with open(data_file, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith("#"):
+                        continue
+                    if line.startswith("include:"):
+                        # include: в mihomo не поддерживается в rule-provider.
+                        continue
+                    if line.startswith("domain:"):
+                        dom = line[len("domain:"):].strip()
+                        payload_lines.append(f"  - DOMAIN-SUFFIX,{dom}")
+                    elif line.startswith("full:"):
+                        dom = line[len("full:"):].strip()
+                        payload_lines.append(f"  - DOMAIN,{dom}")
+                    elif line.startswith("regexp:"):
+                        # mihomo поддерживает DOMAIN-REGEX, но не все версии.
+                        # Оставляем как есть — если не поддерживается, будет warning.
+                        regex = line[len("regexp:"):].strip()
+                        payload_lines.append(f"  - DOMAIN-REGEX,{regex}")
+        except Exception as e:
+            log(f"  [Ошибка] {data_file}: {e}")
+            continue
+
+        if not payload_lines:
+            log(f"  Пропуск {name}: нет доменов для YAML")
+            continue
+
+        yaml_path = MIHOMO_DIR / f"{name}.yaml"
+        with open(yaml_path, "w", encoding="utf-8") as f:
+            f.write(f"# Auto-generated: {name}.yaml\n")
+            f.write("payload:\n")
+            for line in payload_lines:
+                f.write(line + "\n")
+
+        log(f"  Записано {len(payload_lines)} правил в {yaml_path}")
+        count += 1
+
+    if count:
+        log(f"  Всего YAML-файлов: {count} в {MIHOMO_DIR}/")
+    else:
+        log("  YAML-файлы не созданы (нет подходящих данных)")
+    return count > 0
 
 # ---------- Генерация SRS ----------
 
@@ -764,10 +831,17 @@ def main():
         sys.exit(1)
 
     log("Шаг 4: Генерация SRS...")
-    if build_srs():
+    srs_ok = build_srs()
+    if not srs_ok:
+        log("=== geosite.dat готов, но SRS не сгенерированы ===")
+
+    log("Шаг 5: Генерация YAML для mihomo...")
+    mihomo_ok = build_mihomo_yaml()
+
+    if srs_ok or mihomo_ok:
         log("=== Успех! ===")
     else:
-        log("=== geosite.dat готов, но SRS не сгенерированы ===")
+        log("=== Файлы собраны, но дополнительные форматы не сгенерированы ===")
 
 if __name__ == "__main__":
     main()
