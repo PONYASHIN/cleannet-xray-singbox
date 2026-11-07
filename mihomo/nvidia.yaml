@@ -1,0 +1,13 @@
+# Auto-generated: nvidia.yaml
+payload:
+  - DOMAIN-SUFFIX,activation.gfe.nvidia.com
+  - DOMAIN-SUFFIX,events.gfe.nvidia.com
+  - DOMAIN-SUFFIX,gfe.geforce.com
+  - DOMAIN-SUFFIX,gfe.nvidia.com
+  - DOMAIN-SUFFIX,gfwsl.geforce.com
+  - DOMAIN-SUFFIX,nvidia.tt.omtrdc.net
+  - DOMAIN-SUFFIX,services.gfe.nvidia.com
+  - DOMAIN-SUFFIX,smetrics.nvidia.com
+  - DOMAIN-SUFFIX,ssl.google-analytics.com
+  - DOMAIN-SUFFIX,telemetry.gfe.nvidia.com
+  - DOMAIN-SUFFIX,telemetry.nvidia.com
