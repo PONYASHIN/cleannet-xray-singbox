@@ -612,23 +612,31 @@ def build_geosite():
 def build_mihomo_yaml():
     """
     Генерирует YAML-файлы rule-provider для mihomo (Clash Meta).
-    Формат: behavior: domain, payload с DOMAIN-SUFFIX / DOMAIN.
-    Читает файлы из data/ (уже в формате domain-list-community).
+    Читает файлы из data/ (без расширения) и создаёт mihomo/<name>.yaml.
     """
     log("Генерация YAML для mihomo...")
 
     MIHOMO_DIR = Path("mihomo")
     ensure_dir(MIHOMO_DIR)
+    log(f"  Папка назначения: {MIHOMO_DIR.resolve()}")
 
-    # Собираем только те файлы, что лежат в data/ и не являются include-only
-    # (include-only файлы содержат только строки include:, их пропускаем)
+    if not DLC_DATA_DIR.exists():
+        log(f"  [Ошибка] Папка {DLC_DATA_DIR} не существует.")
+        return False
+
+    data_files = [
+        f for f in sorted(DLC_DATA_DIR.iterdir())
+        if f.is_file() and "." not in f.name
+    ]
+    log(f"  Найдено файлов для конвертации: {len(data_files)}")
+
+    if not data_files:
+        log("  [Предупреждение] В data/ нет файлов без расширения.")
+        log("  Проверьте, что шаг сборки geosite отработал и файлы записаны.")
+        return False
+
     count = 0
-    for data_file in sorted(DLC_DATA_DIR.iterdir()):
-        if not data_file.is_file():
-            continue
-        if "." in data_file.name:
-            continue  # наши файлы без расширения
-
+    for data_file in data_files:
         name = data_file.name
         payload_lines = []
 
@@ -639,42 +647,45 @@ def build_mihomo_yaml():
                     if not line or line.startswith("#"):
                         continue
                     if line.startswith("include:"):
-                        # include: в mihomo не поддерживается в rule-provider.
                         continue
                     if line.startswith("domain:"):
                         dom = line[len("domain:"):].strip()
-                        payload_lines.append(f"  - DOMAIN-SUFFIX,{dom}")
+                        if dom:
+                            payload_lines.append(f"  - DOMAIN-SUFFIX,{dom}")
                     elif line.startswith("full:"):
                         dom = line[len("full:"):].strip()
-                        payload_lines.append(f"  - DOMAIN,{dom}")
+                        if dom:
+                            payload_lines.append(f"  - DOMAIN,{dom}")
                     elif line.startswith("regexp:"):
-                        # mihomo поддерживает DOMAIN-REGEX, но не все версии.
-                        # Оставляем как есть — если не поддерживается, будет warning.
                         regex = line[len("regexp:"):].strip()
-                        payload_lines.append(f"  - DOMAIN-REGEX,{regex}")
+                        if regex:
+                            payload_lines.append(f"  - DOMAIN-REGEX,{regex}")
         except Exception as e:
             log(f"  [Ошибка] {data_file}: {e}")
             continue
 
         if not payload_lines:
-            log(f"  Пропуск {name}: нет доменов для YAML")
+            log(f"  Пропуск {name}: нет доменов")
             continue
 
         yaml_path = MIHOMO_DIR / f"{name}.yaml"
-        with open(yaml_path, "w", encoding="utf-8") as f:
-            f.write(f"# Auto-generated: {name}.yaml\n")
-            f.write("payload:\n")
-            for line in payload_lines:
-                f.write(line + "\n")
-
-        log(f"  Записано {len(payload_lines)} правил в {yaml_path}")
-        count += 1
+        try:
+            with open(yaml_path, "w", encoding="utf-8") as f:
+                f.write(f"# Auto-generated: {name}.yaml\n")
+                f.write("payload:\n")
+                for line in payload_lines:
+                    f.write(line + "\n")
+            log(f"  Записано {len(payload_lines)} правил в {yaml_path}")
+            count += 1
+        except Exception as e:
+            log(f"  [Ошибка] Не удалось записать {yaml_path}: {e}")
 
     if count:
         log(f"  Всего YAML-файлов: {count} в {MIHOMO_DIR}/")
+        return True
     else:
-        log("  YAML-файлы не созданы (нет подходящих данных)")
-    return count > 0
+        log("  Ни одного YAML-файла не создано.")
+        return False
 
 # ---------- Генерация SRS ----------
 
