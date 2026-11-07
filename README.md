@@ -47,6 +47,7 @@ Python-скрипт, который:
 4. Генерирует файлы в формате `domain-list-community`
 5. Собирает `geosite.dat`
 6. Собирает `.srs` для sing-box через `geodat2srs`
+6. Собирает `.yaml` для mihomo
 
 ---
 
