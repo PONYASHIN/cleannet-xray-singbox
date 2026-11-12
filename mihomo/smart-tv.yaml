@@ -26,6 +26,7 @@ payload:
   - DOMAIN-SUFFIX,ad.samsungadhub.com
   - DOMAIN-SUFFIX,ad8641f3cff742de893d919add74c2bb.ssm1.internet.sony.tv
   - DOMAIN-SUFFIX,ad8641f3cff742de893d919add74c2bb.ssm2.internet.sony.tv
+  - DOMAIN-SUFFIX,ads-portal-cdn.vidaatv.net
   - DOMAIN-SUFFIX,ads-privacy.vidaahub.com
   - DOMAIN-SUFFIX,ads.aimitv.com
   - DOMAIN-SUFFIX,ads.samsung.com
@@ -300,6 +301,8 @@ payload:
   - DOMAIN-SUFFIX,hbbtvapp.sonnenklar.tv
   - DOMAIN-SUFFIX,hiapp.hismarttv.com
   - DOMAIN-SUFFIX,hisense-0ba453d1.prod.partner.netflix.net
+  - DOMAIN-SUFFIX,hisense-beacons.xumo.com
+  - DOMAIN-SUFFIX,hisense-lite-beacons.xumo.com
   - DOMAIN-SUFFIX,home-ui-eu.vidaahub.com
   - DOMAIN-SUFFIX,homeprv.lgtvcommon.com
   - DOMAIN-SUFFIX,homeprv.lgtvcommon.es
@@ -397,6 +400,8 @@ payload:
   - DOMAIN-SUFFIX,midland.logs.roku.com
   - DOMAIN-SUFFIX,mitv.tracking.intl.miui.com
   - DOMAIN-SUFFIX,mobile.logs.roku.com
+  - DOMAIN-SUFFIX,monetization-ad-tracking.prod-eu-c.az.vidaahub.com
+  - DOMAIN-SUFFIX,monetization-tenant-ads.prod-eu-c.az.vidaahub.com
   - DOMAIN-SUFFIX,mpu.samsungelectronics.com
   - DOMAIN-SUFFIX,msg-cmp.hismarttv.com
   - DOMAIN-SUFFIX,msg-em.hismarttv.com
@@ -502,7 +507,12 @@ payload:
   - DOMAIN-SUFFIX,redbutton-lb-prod.redbutton.de
   - DOMAIN-SUFFIX,redbutton.sim-technik.de
   - DOMAIN-SUFFIX,resource-strings.acc.indazn.com
+  - DOMAIN-SUFFIX,rpt-ads.vidaahub.com
+  - DOMAIN-SUFFIX,rpt-mntz-azure.vidaahub.com
+  - DOMAIN-SUFFIX,rpt-mntz.vidaahub.com
   - DOMAIN-SUFFIX,rpu.samsungelectronics.com
+  - DOMAIN-SUFFIX,rsc-ads.vidaahub.com
+  - DOMAIN-SUFFIX,rsc-mntz.vidaahub.com
   - DOMAIN-SUFFIX,rtl-digitaltext.rtl-hbbtv.de
   - DOMAIN-SUFFIX,rwww.samsungotn.net
   - DOMAIN-SUFFIX,samsungacr.com
@@ -562,6 +572,7 @@ payload:
   - DOMAIN-SUFFIX,traces.sr.roku.com
   - DOMAIN-SUFFIX,track.sr.roku.com
   - DOMAIN-SUFFIX,track.tvping.com
+  - DOMAIN-SUFFIX,tracking-vss.vidaahub.com
   - DOMAIN-SUFFIX,tracking.intl.miui.com
   - DOMAIN-SUFFIX,trvdp.com
   - DOMAIN-SUFFIX,tv-static.scdn.co
@@ -577,7 +588,9 @@ payload:
   - DOMAIN-SUFFIX,tvx.adgrx.com
   - DOMAIN-SUFFIX,uimetadata.samsungiotcloud.com
   - DOMAIN-SUFFIX,unagi-na.amazon.com
+  - DOMAIN-SUFFIX,unified-exc.hismarttv.com
   - DOMAIN-SUFFIX,unified-ter-na.hismarttv.com
+  - DOMAIN-SUFFIX,unified-ter.hismarttv.com
   - DOMAIN-SUFFIX,upu.samsungelectronics.com
   - DOMAIN-SUFFIX,urfcgnbx.1bliq.io
   - DOMAIN-SUFFIX,us-api.samsungyosemite.com

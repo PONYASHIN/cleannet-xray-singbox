@@ -26,6 +26,7 @@ domain:ad.nettvservices.com
 domain:ad.samsungadhub.com
 domain:ad8641f3cff742de893d919add74c2bb.ssm1.internet.sony.tv
 domain:ad8641f3cff742de893d919add74c2bb.ssm2.internet.sony.tv
+domain:ads-portal-cdn.vidaatv.net
 domain:ads-privacy.vidaahub.com
 domain:ads.aimitv.com
 domain:ads.samsung.com
@@ -300,6 +301,8 @@ domain:hbbtv01p.anixe.net
 domain:hbbtvapp.sonnenklar.tv
 domain:hiapp.hismarttv.com
 domain:hisense-0ba453d1.prod.partner.netflix.net
+domain:hisense-beacons.xumo.com
+domain:hisense-lite-beacons.xumo.com
 domain:home-ui-eu.vidaahub.com
 domain:homeprv.lgtvcommon.com
 domain:homeprv.lgtvcommon.es
@@ -397,6 +400,8 @@ domain:mhc-sec-us.myhomescreen.tv
 domain:midland.logs.roku.com
 domain:mitv.tracking.intl.miui.com
 domain:mobile.logs.roku.com
+domain:monetization-ad-tracking.prod-eu-c.az.vidaahub.com
+domain:monetization-tenant-ads.prod-eu-c.az.vidaahub.com
 domain:mpu.samsungelectronics.com
 domain:msg-cmp.hismarttv.com
 domain:msg-em.hismarttv.com
@@ -502,7 +507,12 @@ domain:redbutton-adproxy-lb-prod.redbutton.de
 domain:redbutton-lb-prod.redbutton.de
 domain:redbutton.sim-technik.de
 domain:resource-strings.acc.indazn.com
+domain:rpt-ads.vidaahub.com
+domain:rpt-mntz-azure.vidaahub.com
+domain:rpt-mntz.vidaahub.com
 domain:rpu.samsungelectronics.com
+domain:rsc-ads.vidaahub.com
+domain:rsc-mntz.vidaahub.com
 domain:rtl-digitaltext.rtl-hbbtv.de
 domain:rwww.samsungotn.net
 domain:samsungacr.com
@@ -562,6 +572,7 @@ domain:tpu.samsungelectronics.com
 domain:traces.sr.roku.com
 domain:track.sr.roku.com
 domain:track.tvping.com
+domain:tracking-vss.vidaahub.com
 domain:tracking.intl.miui.com
 domain:trvdp.com
 domain:tv-static.scdn.co
@@ -577,7 +588,9 @@ domain:tvsideviewandroidv2-cfgdst-ore-pro.bda.ndmdhs.com
 domain:tvx.adgrx.com
 domain:uimetadata.samsungiotcloud.com
 domain:unagi-na.amazon.com
+domain:unified-exc.hismarttv.com
 domain:unified-ter-na.hismarttv.com
+domain:unified-ter.hismarttv.com
 domain:upu.samsungelectronics.com
 domain:urfcgnbx.1bliq.io
 domain:us-api.samsungyosemite.com
